@@ -112,6 +112,11 @@ class ApiTestCase(TestCase):
         self.assertEqual(response.status_code, 405)
 
     def assertAuthDisabled(self, method, uri):
+        """
+        Assert that the Django rest framework does not interpret basic auth
+        headers for views exposed to anonymous users as an attempt to authenticate.
+
+        """
         # Django rest framework interprets basic auth headers
         # as an attempt to authenticate with the API.
         # We don't want this for views available to anonymous users.
@@ -987,7 +992,7 @@ class RegistrationViewTest(ApiTestCase):
         )
 
     def test_register_form_year_of_birth(self):
-        this_year = datetime.datetime.now(UTC).year
+        this_year = datetime.datetime.now(UTC).year  # # pylint: disable=maybe-no-member
         year_options = (
             [{"value": "", "name": "--", "default": True}] + [
                 {"value": unicode(year), "name": unicode(year)}

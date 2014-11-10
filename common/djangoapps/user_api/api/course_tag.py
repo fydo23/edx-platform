@@ -62,5 +62,7 @@ def set_course_tag(user, course_id, key, value):
     record.value = value
     record.save()
 
+    # pylint: disable=fixme
     # TODO: There is a risk of IntegrityErrors being thrown here given
-    # simultaneous calls from many processes.  Handle by retrying after a short delay?
+    # simultaneous calls from many processes. Handle by retrying after
+    # a short delay?
